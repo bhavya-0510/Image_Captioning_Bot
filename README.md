@@ -1,42 +1,81 @@
 # 🖼️ Image Captioning Bot
 
-This project implements an end-to-end **Image Captioning Bot** using deep learning and computer vision techniques. It generates natural language captions for images using a combination of Convolutional Neural Networks (CNNs) for image feature extraction and Recurrent Neural Networks (RNNs), specifically LSTMs, for language modeling.
+This project builds an **AI-based Image Captioning Bot** that generates natural language captions for images using deep learning. It combines the visual power of Convolutional Neural Networks (CNNs) with the language modeling ability of Recurrent Neural Networks (RNNs), specifically Long Short-Term Memory (LSTM) units.
 
-## 📋 Table of Contents
+---
+
+## 📌 Project Structure
+
+
+---
+
+## 📚 Table of Contents
+
 - [Overview](#overview)
 - [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
 - [Model Architecture](#model-architecture)
 - [Dataset](#dataset)
-- [Results](#results)
+- [Installation](#installation)
+- [Running the Project](#running-the-project)
+- [Evaluation](#evaluation)
+- [Sample Results](#sample-results)
+- [Future Improvements](#future-improvements)
 - [License](#license)
+
+---
 
 ## 🧠 Overview
 
-The pipeline follows these core steps:
+The bot learns to describe images in human language by training on a dataset of images and their captions. The model architecture follows the popular **encoder-decoder** paradigm:
 
-1. **Data Collection**
-2. **Understanding and Cleaning Captions**
-3. **Preprocessing Images using Pre-trained CNNs (VGG16/ResNet50)**
-4. **Preprocessing Text**
-5. **Tokenization and Word Embeddings**
-6. **Model Design and Training**
-7. **Caption Generation (Inference)**
-8. **Evaluation**
+- **Encoder (CNN):** Converts an image into a feature vector.
+- **Decoder (RNN):** Converts the feature vector into a natural language sentence.
+
+---
 
 ## ✨ Features
 
-- Image preprocessing with **ResNet50** or **VGG16**
-- Custom **caption tokenizer** and preprocessing pipeline
-- Training using **Generator functions** to handle large datasets
-- **Word Embedding** support
-- **Beam Search** for better caption generation
-- BLEU Score-based **evaluation**
+✅ Extracts features using pretrained CNNs (ResNet50/VGG16)  
+✅ Cleans and tokenizes captions  
+✅ Uses a generator for memory-efficient training  
+✅ Embeds words using learned embeddings  
+✅ Caption generation with **greedy** and **beam search** strategies  
+✅ Evaluated using **BLEU score**
+
+---
+
+## 🧱 Model Architecture
+
+- **CNN (e.g. ResNet50):** Extracts image features (last layer output before FC).
+- **LSTM:** Processes the text sequence (caption).
+- **Embedding Layer:** Converts words into dense vectors.
+- **Dense Layer:** Predicts the next word in the sequence.
+
+---
+
+## 🗂️ Dataset
+
+The model is designed to work with datasets like **Flickr8k**, **Flickr30k**, or **MS COCO**, which contain:
+
+- Images
+- Text file mapping image filenames to 5 human-written captions each
+
+Example caption entry:
+
+
+**Required files:**
+
+- `Flickr8k_Dataset/` – Folder containing JPEG images
+- `Flickr8k_text/captions.txt` – File mapping image filenames to captions
+
+---
 
 ## ⚙️ Installation
 
-Install the required libraries via pip:
+Install the dependencies (recommended: use a virtual environment):
 
 ```bash
 pip install numpy pandas matplotlib nltk tensorflow keras pillow
+
+import nltk
+nltk.download('stopwords')
